@@ -8,8 +8,10 @@ About 1k2b
 
 One Kilobyte, 2 Beeps, or short 1k2b, is a 2 channel beeper
 music routine for the unexpanded Sinclair ZX81. A machine
-with "loud beeper" mod as suggested by ... is recommended
-for playback. The routine also runs on RAM-expanded machines.
+with "loud cassette" mod as suggested in Funkschau 18/1983
+(http://www.sinclairzxworld.com/viewtopic.php?f=7&t=514) is 
+recommended for playback. The routine also runs on RAM-
+expanded machines.
 
 1k2b features 2 channels of square wave with 16-bit frequency
 dividers as well as two interrupting click drum sounds.
@@ -22,9 +24,10 @@ In order to use the 1k2b compiler package, you need the
 following:
 
 - pasmo or a compatible assembler of your choice
-- Perl
+  (http://pasmo.speccy.org)
+- Perl (http://www.perl.org/get.html)
 - Milkytracker or another XM tracker that supports XM 
-  version 1.04
+  version 1.04 (http://milkytracker.org)
 - a ZX81 or an emulator that correctly emulates the ZX81's
   behaviour regarding ports (as of 03/2015, EightyOne is the
   only such emulator afaik)
@@ -131,6 +134,6 @@ drum 2 (kick drum), add #c0 to the note value.
 Thanks
 ======
 
-... to kohikkis for reinstating my belief that polyphonic
+... to kokkiklhs for reinstating my belief that polyphonic
     beeper music is possible on ZX81.
 ... to no$cash for properly documenting the ZX81 ports.
