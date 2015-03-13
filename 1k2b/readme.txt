@@ -16,6 +16,11 @@ expanded machines.
 1k2b features 2 channels of square wave with 16-bit frequency
 dividers as well as two interrupting click drum sounds.
 
+1k2b comes in 2 flavours - the standard version, and the
+"extra" version. The latter allows for a larger music data
+section - but works only as a standalone file, ie. it cannot
+be used in other programs.
+
 
 Requirements
 ============
@@ -74,10 +79,19 @@ even value.
 
 All other effects, volume and panning settings are ignored.
 
-On unexpanded (1K) ZX81, the music data size is limited to
-541 bytes. The assembler will warn you in case you exceed
-the limit. On expanded machines, you can increase the value
-in line 235 of main.asm to allow for larger music data.
+As mentioned previously, 1k2b comes in two different versions.
+Use compile.bat/compile.sh to compile the standard version,
+resp. compile-extra.bat/compile-extra.sh to compile the
+"extra" version.
+
+Music data size on unexpanded (1K) machines is limited to
+541 bytes in the standard version, and 643 bytes in the extra
+version. The drawback of the latter version is that it can
+only be used as a standalone application.
+
+In any case, the assembler will warn you in case you exceed
+the memory limit. On expanded machines, you can increase the
+value in line 235 of main.asm to allow for larger music data.
 
 
 Note to Programmers
@@ -85,13 +99,20 @@ Note to Programmers
 
 1k2b is optimized for unexpanded 1K Zeddies. To use it on
 expanded machines, you most likely want to change the org
-statement in line 235 of main.asm to point to a higher
+statement in line 235/236 of main.asm to point to a higher
 address.
 
 The routine never returns, so if you intend to use it in
 a larger project, you need to add your own exit procedure
-and jump to it from line 127 of main.asm. The exit routine
-needs to enable regular and NMI interrupts.
+and jump to it from line 127 of main.asm (standard version
+only, see below). The exit routine needs to enable regular
+and NMI interrupts.
+
+The "extra" version of 1k2b enters the machine code via a
+jump command at the D-FILE location, thus omitting the need
+for a REM line, RAND USR command, and the actual D-FILE.
+As mentioned before, the drawback of this is that you cannot
+easily return from the program.
 
 In its current form, 1k2b cannot be relocated, however this
 can be facilitated with a few minor changes. Just make sure
