@@ -34,8 +34,8 @@ following:
 - Milkytracker or another XM tracker that supports XM 
   version 1.04 (http://milkytracker.org)
 - a ZX81 or an emulator that correctly emulates the ZX81's
-  behaviour regarding ports (as of 03/2015, EightyOne is the
-  only such emulator afaik)
+  behaviour regarding ports (EightyOne for Windows, or the
+  latest sz81 [v2.1.9] for *nix)
 
 
 Usage
