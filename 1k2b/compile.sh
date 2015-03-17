@@ -1,4 +1,6 @@
 #!/bin/sh
 
-./xm21k1b.pl
-pasmo --alocal main.asm 1k2b.p
+./xm21k2b.pl
+pasmo -d --alocal main.asm 1k2b.p
+#./zx81putil -p2w 1k2b.p
+#sz81 -w 1k2b.p
