@@ -75,9 +75,9 @@ even value.
 All other effects, volume and panning settings are ignored.
 
 Music data size on unexpanded (1K) machines is limited to
-547 bytes. The assembler will warn you in case you exceed
+594 bytes. The assembler will warn you in case you exceed
 the memory limit. On expanded machines, you can increase the
-value in line 235 of main.asm to allow for larger music data.
+value in line 277 of main.asm to allow for larger music data.
 It is safest to only increase the first two digits (43).
 
 
@@ -86,7 +86,7 @@ Note to Programmers
 
 1k2b is optimized for unexpanded 1K Zeddies. To use it on
 expanded machines, you most likely want to change the org
-statement in line 247 of main.asm to point to a higher
+statement in line 277 of main.asm to point to a higher
 address. Make sure that the frequency table (@notetab) does
 not cross page boundaries.
 

@@ -165,8 +165,8 @@ for ($ix = 0; $ix <= ($uniqueptns)-1; $ix++) {
 						$temp = ord($temp);
 				
 						if (($cpval&1) == 1) {				#if bit 0 is set, it's note -> counter val.		
-							if ($temp >= 0x31 || $temp ==0) {
-								$debug++ if ($temp != 97 && $temp != 0);	#correction for stop note signal
+							if ($temp >= 0x31) {
+								#$debug++ if ($temp != 97 && $temp >= 32);	#correction for stop note signal
 								$temp = 0x31;
 							}
 							$ch2[$rows] = $temp if ($mx == 0);
@@ -211,7 +211,7 @@ for ($ix = 0; $ix <= ($uniqueptns)-1; $ix++) {
 				else {			#if we have uncompressed data
 					$temp = $cpval;
 					if ($temp >= 0x31 || $temp ==0) {
-						$debug++ if ($temp != 97 && $temp != 0);	#correction for stop note signal
+						#$debug++ if ($temp != 97 && $temp != 0);	#correction for stop note signal
 						$temp = 0x31;
 					}
 					$ch2[$rows] = $temp if ($mx == 0);
