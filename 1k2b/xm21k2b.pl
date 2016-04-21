@@ -35,7 +35,7 @@ unlink $outfile if ( -e $outfile );
 open OUTFILE, ">$outfile" or die $!;
 
 #setup variables
-my ($binpos, $fileoffset, $ptnoffset, $ix, $uniqueptns, $headlength, $packedlength, $plhibyte, $ptnlengthx, $ptnusage);
+my ($binpos, $fileoffset, $ptnoffset, $ix, $uniqueptns, $headlength, $packedlength, $plhibyte, $ptnlengthx, $ptnusage, $temp);
 use vars qw/$songlength/;
 
 #check if xm is version 1.04
@@ -76,7 +76,16 @@ print "unique patterns:\t $uniqueptns \n" if ( $ARGV[0] eq '-v' );
 #locate the pattern headers within the .xm source file and check pattern lengths
 my (@ptnoffsetlist, @ptnlengths);
 
-$ptnoffsetlist[0] = 336;
+sysseek(INFILE, 60, 0) or die $!;
+sysread(INFILE, $headlength, 1) == 1 or die $!;
+$headlength = ord($headlength);
+sysseek(INFILE, 61, 0) or die $!;
+sysread(INFILE, $temp, 1) == 1 or die $!;
+$headlength += ord($temp)*256;
+
+$ptnoffsetlist[0] = $headlength + 60;
+
+#$ptnoffsetlist[0] = 336;
 $fileoffset = $ptnoffsetlist[0];
 
 for ($ix = 0; $ix < $uniqueptns; $ix++) {
@@ -126,7 +135,7 @@ print OUTFILE "\tdw ",'0',"\n\n";
 
 #convert pattern data
 my (@ch2, @ch3, @drums, @speed);
-my ($rows, $cpval, $temp, $temp2, $mx, $nx);
+my ($rows, $cpval, $temp2, $mx, $nx);
 for ($ix = 0; $ix <= ($uniqueptns)-1; $ix++) {
 
 	$ptnusage = IsPatternUsed($ix);
