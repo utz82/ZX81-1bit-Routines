@@ -1,6 +1,7 @@
 1k2b - beeper music routine for ZX81
 by utz 03'2015 * www.irrlichtproject.de
-===================================================
+super maxi loader extension by stevexyz 02'2026 * https://github.com/stevexyz/ZX81-1bit-Routine
+===============================================================================================
 
 
 About 1k2b
@@ -22,16 +23,18 @@ Requirements
 
 In order to use the 1k2b compiler package, you need the
 following:
-
 - pasmo or a compatible assembler of your choice
   (http://pasmo.speccy.org)
-- Perl (http://www.perl.org/get.html)
-- Milkytracker or another XM tracker that supports XM 
-  version 1.04 (http://milkytracker.org)
+- the Super Maxi Loader binaries for smlfilegen and/or smloadgen
+  (https://github.com/stevexyz/ZX81-1K-Super-Maxi-Loader)
 - a ZX81 or an emulator that correctly emulates the ZX81's
   behaviour regarding ports (EightyOne for Windows, or the
   latest sz81 [v2.1.9] for *nix)
 
+For music editing an XM tracker can be used and are needed:
+- Perl (http://www.perl.org/get.html)
+- Milkytracker or another XM tracker that supports XM 
+  version 1.04 (http://milkytracker.org)
 
 Usage
 =====
@@ -39,8 +42,8 @@ Usage
 Provided you have pasmo and perl installed and/or available
 in your search path, you may
 
-Step 1: Compose music using the provided XM template
-Step 2: Execute compile.bat/compile.sh
+Step 1: Compose music (in case using the provided XM template)
+Step 2: Execute make-sml.sh / make-sml.bat
 Step 3: Profit!
 
 
@@ -81,23 +84,6 @@ value in line 277 of main.asm to allow for larger music data.
 It is safest to only increase the first two digits (43).
 
 
-Note to Programmers
-===================
-
-1k2b is optimized for unexpanded 1K Zeddies. To use it on
-expanded machines, you most likely want to change the org
-statement in line 277 of main.asm to point to a higher
-address. Make sure that the frequency table (@notetab) does
-not cross page boundaries.
-
-The routine never returns, so if you intend to use it in
-a larger project, you need to add your own exit procedure
-and jump to it from line 112 of main.asm.
-
-In its current form, 1k2b cannot be relocated, however this
-can be facilitated with a few minor changes.
-
-
 Music Data Format Specification
 ===============================
 
@@ -124,10 +110,26 @@ tempo switch, which halves the global speed when activated.
 Valid note values are 0..#30. A value of #31 silences the 
 channel. To activate the aux tempo switch, add #80 to the note
 value.
-The scond byte in a row of pattern data sets the note value
+The second byte in a row of pattern data sets the note value
 for channel 2 and also contains the drum triggers. To trigger
 drum 1 (hihat sound), add #80 to the note value. To trigger
 drum 2 (kick drum), add #c0 to the note value.
+
+Values for notes:
+C-0 = 0
+C#0 = 1
+...
+B-0 = 11
+C-1 = 12
+...
+C-2 = 24
+C-3 = 36
+C-4 = 48 (#30)
+Silence = #31
+
+Additional values:
+Channel 1 to set half-speed = note +#80
+Channel 2 for drums : hihat = note +#80 ; kick = note +#C0
 
 
 Thanks
